@@ -125,7 +125,7 @@ func (ps *PaymentService) UpdatePayment(ctx context.Context, pt *paymentapi.Paym
 	}
 	data, err := ps.db.Get(key, nil)
 	if err != nil {
-		return nil, status.Error(codes.Internal, err.Error())
+		return nil, status.Error(codes.NotFound, err.Error())
 	}
 	baseMsg, err := unmarshalPayment(data)
 	if err != nil {
@@ -157,7 +157,7 @@ func (ps *PaymentService) DeletePayment(ctx context.Context, pt *paymentapi.Paym
 	}
 	err = ps.db.Delete(key, nil)
 	if err != nil {
-		return nil, status.Error(codes.Internal, err.Error())
+		return nil, status.Error(codes.NotFound, err.Error())
 	}
 	return pt, nil
 }
