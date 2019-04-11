@@ -6,9 +6,17 @@ PDF file with API description is generated from swagger documentation from `grpc
 
 Models and original design are defined with protobuf file and yaml http annotations under `paymentapi/api.proto` and `paymentapi/payment_service.yaml`.
 
-Implementation of service is located under `paymentapi/paymentservice`.
+Implementation of service is located under `paymentservice`.
 
 Server runtime is can be found under `cmd` directory.
+
+# Testing
+
+Tests are BDD based tests with `ginkgo`, please run `make test`.
+
+# Client
+
+Client is generated form swagger definition.
 
 # TODO
 
