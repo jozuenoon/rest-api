@@ -1,0 +1,18 @@
+type: google.api.Service
+config_version: 3
+
+http:
+  rules:
+  - selector: paymentapi.PaymentService.GetPayment
+    get: /v1/transaction/payments/{id}
+    additional_bindings:
+      - get: /v1/transaction/payments
+  - selector: paymentapi.PaymentService.CreatePayment
+    post: /v1/transaction/payments
+    body: "*"
+  - selector: paymentapi.PaymentService.UpdatePayment
+    patch: /v1/transaction/payments/{id}
+    body: "payment_attributes"
+  - selector: paymentapi.PaymentService.DeletePayment
+    delete: /v1/transaction/payments/{id}
+

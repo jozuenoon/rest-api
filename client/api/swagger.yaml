@@ -1,0 +1,558 @@
+---
+swagger: "2.0"
+info:
+  version: "1.0"
+  title: "FinTech api"
+  contact:
+    name: "FinTech api back"
+    url: "https://github.com/jozuenoone/rest-api"
+    email: "none@example.com"
+schemes:
+- "https"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+security:
+- ApiKeyAuth: []
+paths:
+  /v1/transaction/payments:
+    get:
+      tags:
+      - "PaymentService"
+      operationId: "GetPayment2"
+      parameters:
+      - name: "id"
+        in: "query"
+        required: false
+        type: "string"
+        x-exportParamName: "Id"
+        x-optionalDataType: "String"
+      responses:
+        200:
+          description: "A successful response."
+          schema:
+            $ref: "#/definitions/paymentapiPaymentServiceResponse"
+        403:
+          description: "Returned when the user does not have permission to access\
+            \ the resource."
+          schema:
+            $ref: "#/definitions/paymentapiError"
+        404:
+          description: "Returned when the resource does not exist."
+          schema:
+            $ref: "#/definitions/paymentapiError"
+    post:
+      tags:
+      - "PaymentService"
+      operationId: "CreatePayment"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/paymentapiPaymentAttributes"
+        x-exportParamName: "Body"
+      responses:
+        200:
+          description: "A successful response."
+          schema:
+            $ref: "#/definitions/paymentapiPaymentServiceResponse"
+        403:
+          description: "Returned when the user does not have permission to access\
+            \ the resource."
+          schema:
+            $ref: "#/definitions/paymentapiError"
+        404:
+          description: "Returned when the resource does not exist."
+          schema:
+            $ref: "#/definitions/paymentapiError"
+  /v1/transaction/payments/{id}:
+    get:
+      tags:
+      - "PaymentService"
+      operationId: "GetPayment"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "A successful response."
+          schema:
+            $ref: "#/definitions/paymentapiPaymentServiceResponse"
+        403:
+          description: "Returned when the user does not have permission to access\
+            \ the resource."
+          schema:
+            $ref: "#/definitions/paymentapiError"
+        404:
+          description: "Returned when the resource does not exist."
+          schema:
+            $ref: "#/definitions/paymentapiError"
+    delete:
+      tags:
+      - "PaymentService"
+      operationId: "DeletePayment"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+        x-exportParamName: "Id"
+      responses:
+        200:
+          description: "A successful response."
+          schema:
+            $ref: "#/definitions/paymentapiPaymentRequest"
+        403:
+          description: "Returned when the user does not have permission to access\
+            \ the resource."
+          schema:
+            $ref: "#/definitions/paymentapiError"
+        404:
+          description: "Returned when the resource does not exist."
+          schema:
+            $ref: "#/definitions/paymentapiError"
+    patch:
+      tags:
+      - "PaymentService"
+      operationId: "UpdatePayment"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+        x-exportParamName: "Id"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/paymentapiPaymentAttributes"
+        x-exportParamName: "Body"
+      responses:
+        200:
+          description: "A successful response."
+          schema:
+            $ref: "#/definitions/paymentapiPaymentServiceResponse"
+        403:
+          description: "Returned when the user does not have permission to access\
+            \ the resource."
+          schema:
+            $ref: "#/definitions/paymentapiError"
+        404:
+          description: "Returned when the resource does not exist."
+          schema:
+            $ref: "#/definitions/paymentapiError"
+securityDefinitions:
+  ApiKeyAuth:
+    type: "apiKey"
+    name: "X-API-Key"
+    in: "header"
+definitions:
+  ChargersInformationSenderCharges:
+    type: "object"
+    properties:
+      amount:
+        type: "string"
+      currentcy:
+        type: "string"
+    example:
+      amount: "amount"
+      currentcy: "currentcy"
+  paymentapiBeneficiaryParty:
+    type: "object"
+    properties:
+      account_name:
+        type: "string"
+      account_number:
+        type: "string"
+      account_number_code:
+        type: "string"
+      account_type:
+        type: "integer"
+        format: "int32"
+      address:
+        type: "string"
+      bank_id:
+        type: "string"
+      bank_id_code:
+        type: "string"
+      name:
+        type: "string"
+    example:
+      bank_id_code: "bank_id_code"
+      account_number: "account_number"
+      account_type: 0
+      address: "address"
+      bank_id: "bank_id"
+      account_name: "account_name"
+      name: "name"
+      account_number_code: "account_number_code"
+  paymentapiChargersInformation:
+    type: "object"
+    properties:
+      bearer_code:
+        type: "string"
+      sender_charges:
+        type: "array"
+        items:
+          $ref: "#/definitions/ChargersInformationSenderCharges"
+      receiver_charges_amount:
+        type: "string"
+      receiver_charges_currency:
+        type: "string"
+    example:
+      sender_charges:
+      - amount: "amount"
+        currentcy: "currentcy"
+      - amount: "amount"
+        currentcy: "currentcy"
+      bearer_code: "bearer_code"
+      receiver_charges_amount: "receiver_charges_amount"
+      receiver_charges_currency: "receiver_charges_currency"
+  paymentapiDebtorParty:
+    type: "object"
+    properties:
+      account_name:
+        type: "string"
+      account_number:
+        type: "string"
+      account_number_code:
+        type: "string"
+      address:
+        type: "string"
+      bank_id:
+        type: "string"
+      bank_id_code:
+        type: "string"
+      name:
+        type: "string"
+    example:
+      bank_id_code: "bank_id_code"
+      account_number: "account_number"
+      address: "address"
+      bank_id: "bank_id"
+      account_name: "account_name"
+      name: "name"
+      account_number_code: "account_number_code"
+  paymentapiError:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+      error:
+        type: "string"
+      code:
+        type: "integer"
+        format: "int32"
+  paymentapiFx:
+    type: "object"
+    properties:
+      contract_reference:
+        type: "string"
+      exchange_rate:
+        type: "string"
+      original_amount:
+        type: "string"
+      original_currency:
+        type: "string"
+    example:
+      original_currency: "original_currency"
+      exchange_rate: "exchange_rate"
+      original_amount: "original_amount"
+      contract_reference: "contract_reference"
+  paymentapiPayment:
+    type: "object"
+    required:
+    - "organisation_id"
+    properties:
+      type:
+        type: "string"
+      id:
+        type: "string"
+      version:
+        type: "string"
+      organisation_id:
+        type: "string"
+      attributes:
+        $ref: "#/definitions/paymentapiPaymentAttributes"
+    externalDocs:
+      description: "Find out more about PaymentAPI"
+      url: "https://github.com/jozuenoon/rest-api/paymentapi"
+    title: "Payment"
+    description: "Payment model"
+    example:
+      organisation_id: "organisation_id"
+      attributes:
+        payment_scheme: "payment_scheme"
+        debtor_party:
+          bank_id_code: "bank_id_code"
+          account_number: "account_number"
+          address: "address"
+          bank_id: "bank_id"
+          account_name: "account_name"
+          name: "name"
+          account_number_code: "account_number_code"
+        amount: "amount"
+        sponsor_party:
+          bank_id_code: "bank_id_code"
+          account_number: "account_number"
+          bank_id: "bank_id"
+        scheme_payment_sub_type: "scheme_payment_sub_type"
+        processing_date: "processing_date"
+        charges_information:
+          sender_charges:
+          - amount: "amount"
+            currentcy: "currentcy"
+          - amount: "amount"
+            currentcy: "currentcy"
+          bearer_code: "bearer_code"
+          receiver_charges_amount: "receiver_charges_amount"
+          receiver_charges_currency: "receiver_charges_currency"
+        numeric_reference: "numeric_reference"
+        reference: "reference"
+        end_to_end_reference: "end_to_end_reference"
+        payment_type: "payment_type"
+        fx:
+          original_currency: "original_currency"
+          exchange_rate: "exchange_rate"
+          original_amount: "original_amount"
+          contract_reference: "contract_reference"
+        beneficiary_party:
+          bank_id_code: "bank_id_code"
+          account_number: "account_number"
+          account_type: 0
+          address: "address"
+          bank_id: "bank_id"
+          account_name: "account_name"
+          name: "name"
+          account_number_code: "account_number_code"
+        payment_purpose: "payment_purpose"
+        payment_id: "payment_id"
+        currency: "currency"
+        scheme_payment_type: "scheme_payment_type"
+      id: "id"
+      type: "type"
+      version: "version"
+  paymentapiPaymentAttributes:
+    type: "object"
+    properties:
+      amount:
+        type: "string"
+        format: "int64"
+      currency:
+        type: "string"
+      numeric_reference:
+        type: "string"
+      payment_id:
+        type: "string"
+      payment_purpose:
+        type: "string"
+      payment_scheme:
+        type: "string"
+      payment_type:
+        type: "string"
+      processing_date:
+        type: "string"
+      reference:
+        type: "string"
+      scheme_payment_sub_type:
+        type: "string"
+      scheme_payment_type:
+        type: "string"
+      end_to_end_reference:
+        type: "string"
+      beneficiary_party:
+        $ref: "#/definitions/paymentapiBeneficiaryParty"
+      charges_information:
+        $ref: "#/definitions/paymentapiChargersInformation"
+      fx:
+        $ref: "#/definitions/paymentapiFx"
+      debtor_party:
+        $ref: "#/definitions/paymentapiDebtorParty"
+      sponsor_party:
+        $ref: "#/definitions/paymentapiSponsorParty"
+    example:
+      payment_scheme: "payment_scheme"
+      debtor_party:
+        bank_id_code: "bank_id_code"
+        account_number: "account_number"
+        address: "address"
+        bank_id: "bank_id"
+        account_name: "account_name"
+        name: "name"
+        account_number_code: "account_number_code"
+      amount: "amount"
+      sponsor_party:
+        bank_id_code: "bank_id_code"
+        account_number: "account_number"
+        bank_id: "bank_id"
+      scheme_payment_sub_type: "scheme_payment_sub_type"
+      processing_date: "processing_date"
+      charges_information:
+        sender_charges:
+        - amount: "amount"
+          currentcy: "currentcy"
+        - amount: "amount"
+          currentcy: "currentcy"
+        bearer_code: "bearer_code"
+        receiver_charges_amount: "receiver_charges_amount"
+        receiver_charges_currency: "receiver_charges_currency"
+      numeric_reference: "numeric_reference"
+      reference: "reference"
+      end_to_end_reference: "end_to_end_reference"
+      payment_type: "payment_type"
+      fx:
+        original_currency: "original_currency"
+        exchange_rate: "exchange_rate"
+        original_amount: "original_amount"
+        contract_reference: "contract_reference"
+      beneficiary_party:
+        bank_id_code: "bank_id_code"
+        account_number: "account_number"
+        account_type: 0
+        address: "address"
+        bank_id: "bank_id"
+        account_name: "account_name"
+        name: "name"
+        account_number_code: "account_number_code"
+      payment_purpose: "payment_purpose"
+      payment_id: "payment_id"
+      currency: "currency"
+      scheme_payment_type: "scheme_payment_type"
+  paymentapiPaymentRequest:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+    example:
+      id: "id"
+  paymentapiPaymentServiceResponse:
+    type: "object"
+    properties:
+      data:
+        type: "array"
+        items:
+          $ref: "#/definitions/paymentapiPayment"
+    example:
+      data:
+      - organisation_id: "organisation_id"
+        attributes:
+          payment_scheme: "payment_scheme"
+          debtor_party:
+            bank_id_code: "bank_id_code"
+            account_number: "account_number"
+            address: "address"
+            bank_id: "bank_id"
+            account_name: "account_name"
+            name: "name"
+            account_number_code: "account_number_code"
+          amount: "amount"
+          sponsor_party:
+            bank_id_code: "bank_id_code"
+            account_number: "account_number"
+            bank_id: "bank_id"
+          scheme_payment_sub_type: "scheme_payment_sub_type"
+          processing_date: "processing_date"
+          charges_information:
+            sender_charges:
+            - amount: "amount"
+              currentcy: "currentcy"
+            - amount: "amount"
+              currentcy: "currentcy"
+            bearer_code: "bearer_code"
+            receiver_charges_amount: "receiver_charges_amount"
+            receiver_charges_currency: "receiver_charges_currency"
+          numeric_reference: "numeric_reference"
+          reference: "reference"
+          end_to_end_reference: "end_to_end_reference"
+          payment_type: "payment_type"
+          fx:
+            original_currency: "original_currency"
+            exchange_rate: "exchange_rate"
+            original_amount: "original_amount"
+            contract_reference: "contract_reference"
+          beneficiary_party:
+            bank_id_code: "bank_id_code"
+            account_number: "account_number"
+            account_type: 0
+            address: "address"
+            bank_id: "bank_id"
+            account_name: "account_name"
+            name: "name"
+            account_number_code: "account_number_code"
+          payment_purpose: "payment_purpose"
+          payment_id: "payment_id"
+          currency: "currency"
+          scheme_payment_type: "scheme_payment_type"
+        id: "id"
+        type: "type"
+        version: "version"
+      - organisation_id: "organisation_id"
+        attributes:
+          payment_scheme: "payment_scheme"
+          debtor_party:
+            bank_id_code: "bank_id_code"
+            account_number: "account_number"
+            address: "address"
+            bank_id: "bank_id"
+            account_name: "account_name"
+            name: "name"
+            account_number_code: "account_number_code"
+          amount: "amount"
+          sponsor_party:
+            bank_id_code: "bank_id_code"
+            account_number: "account_number"
+            bank_id: "bank_id"
+          scheme_payment_sub_type: "scheme_payment_sub_type"
+          processing_date: "processing_date"
+          charges_information:
+            sender_charges:
+            - amount: "amount"
+              currentcy: "currentcy"
+            - amount: "amount"
+              currentcy: "currentcy"
+            bearer_code: "bearer_code"
+            receiver_charges_amount: "receiver_charges_amount"
+            receiver_charges_currency: "receiver_charges_currency"
+          numeric_reference: "numeric_reference"
+          reference: "reference"
+          end_to_end_reference: "end_to_end_reference"
+          payment_type: "payment_type"
+          fx:
+            original_currency: "original_currency"
+            exchange_rate: "exchange_rate"
+            original_amount: "original_amount"
+            contract_reference: "contract_reference"
+          beneficiary_party:
+            bank_id_code: "bank_id_code"
+            account_number: "account_number"
+            account_type: 0
+            address: "address"
+            bank_id: "bank_id"
+            account_name: "account_name"
+            name: "name"
+            account_number_code: "account_number_code"
+          payment_purpose: "payment_purpose"
+          payment_id: "payment_id"
+          currency: "currency"
+          scheme_payment_type: "scheme_payment_type"
+        id: "id"
+        type: "type"
+        version: "version"
+  paymentapiSponsorParty:
+    type: "object"
+    properties:
+      account_number:
+        type: "string"
+      bank_id:
+        type: "string"
+      bank_id_code:
+        type: "string"
+    example:
+      bank_id_code: "bank_id_code"
+      account_number: "account_number"
+      bank_id: "bank_id"

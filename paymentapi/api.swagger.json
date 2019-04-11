@@ -1,0 +1,459 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "FinTech api",
+    "version": "1.0",
+    "contact": {
+      "name": "FinTech api back",
+      "url": "https://github.com/jozuenoone/rest-api",
+      "email": "none@example.com"
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/transaction/payments": {
+      "get": {
+        "operationId": "GetPayment2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/paymentapiPaymentServiceResponse"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/paymentapiError"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/paymentapiError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PaymentService"
+        ]
+      },
+      "post": {
+        "operationId": "CreatePayment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/paymentapiPaymentServiceResponse"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/paymentapiError"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/paymentapiError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/paymentapiPaymentAttributes"
+            }
+          }
+        ],
+        "tags": [
+          "PaymentService"
+        ]
+      }
+    },
+    "/v1/transaction/payments/{id}": {
+      "get": {
+        "operationId": "GetPayment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/paymentapiPaymentServiceResponse"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/paymentapiError"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/paymentapiError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PaymentService"
+        ]
+      },
+      "delete": {
+        "operationId": "DeletePayment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/paymentapiPaymentRequest"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/paymentapiError"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/paymentapiError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PaymentService"
+        ]
+      },
+      "patch": {
+        "operationId": "UpdatePayment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/paymentapiPaymentServiceResponse"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/paymentapiError"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/paymentapiError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/paymentapiPaymentAttributes"
+            }
+          }
+        ],
+        "tags": [
+          "PaymentService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "ChargersInformationSenderCharges": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "string"
+        },
+        "currentcy": {
+          "type": "string"
+        }
+      }
+    },
+    "paymentapiBeneficiaryParty": {
+      "type": "object",
+      "properties": {
+        "account_name": {
+          "type": "string"
+        },
+        "account_number": {
+          "type": "string"
+        },
+        "account_number_code": {
+          "type": "string"
+        },
+        "account_type": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "address": {
+          "type": "string"
+        },
+        "bank_id": {
+          "type": "string"
+        },
+        "bank_id_code": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "paymentapiChargersInformation": {
+      "type": "object",
+      "properties": {
+        "bearer_code": {
+          "type": "string"
+        },
+        "sender_charges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChargersInformationSenderCharges"
+          }
+        },
+        "receiver_charges_amount": {
+          "type": "string"
+        },
+        "receiver_charges_currency": {
+          "type": "string"
+        }
+      }
+    },
+    "paymentapiDebtorParty": {
+      "type": "object",
+      "properties": {
+        "account_name": {
+          "type": "string"
+        },
+        "account_number": {
+          "type": "string"
+        },
+        "account_number_code": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "bank_id": {
+          "type": "string"
+        },
+        "bank_id_code": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "paymentapiError": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        },
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "paymentapiFx": {
+      "type": "object",
+      "properties": {
+        "contract_reference": {
+          "type": "string"
+        },
+        "exchange_rate": {
+          "type": "string"
+        },
+        "original_amount": {
+          "type": "string"
+        },
+        "original_currency": {
+          "type": "string"
+        }
+      }
+    },
+    "paymentapiPayment": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "organisation_id": {
+          "type": "string"
+        },
+        "attributes": {
+          "$ref": "#/definitions/paymentapiPaymentAttributes"
+        }
+      },
+      "description": "Payment model",
+      "title": "Payment",
+      "externalDocs": {
+        "description": "Find out more about PaymentAPI",
+        "url": "https://github.com/jozuenoon/rest-api/paymentapi"
+      },
+      "required": [
+        "organisation_id"
+      ]
+    },
+    "paymentapiPaymentAttributes": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "numeric_reference": {
+          "type": "string"
+        },
+        "payment_id": {
+          "type": "string"
+        },
+        "payment_purpose": {
+          "type": "string"
+        },
+        "payment_scheme": {
+          "type": "string"
+        },
+        "payment_type": {
+          "type": "string"
+        },
+        "processing_date": {
+          "type": "string"
+        },
+        "reference": {
+          "type": "string"
+        },
+        "scheme_payment_sub_type": {
+          "type": "string"
+        },
+        "scheme_payment_type": {
+          "type": "string"
+        },
+        "end_to_end_reference": {
+          "type": "string"
+        },
+        "beneficiary_party": {
+          "$ref": "#/definitions/paymentapiBeneficiaryParty"
+        },
+        "charges_information": {
+          "$ref": "#/definitions/paymentapiChargersInformation"
+        },
+        "fx": {
+          "$ref": "#/definitions/paymentapiFx"
+        },
+        "debtor_party": {
+          "$ref": "#/definitions/paymentapiDebtorParty"
+        },
+        "sponsor_party": {
+          "$ref": "#/definitions/paymentapiSponsorParty"
+        }
+      }
+    },
+    "paymentapiPaymentRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "paymentapiPaymentServiceResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentapiPayment"
+          }
+        }
+      }
+    },
+    "paymentapiSponsorParty": {
+      "type": "object",
+      "properties": {
+        "account_number": {
+          "type": "string"
+        },
+        "bank_id": {
+          "type": "string"
+        },
+        "bank_id_code": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "X-API-Key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ]
+}
