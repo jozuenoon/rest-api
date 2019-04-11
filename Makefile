@@ -10,4 +10,4 @@ test:
 
 .PHONY: run
 run:
-	go run cmd/payment/*.go
+	go run cmd/*.go
