@@ -35,4 +35,5 @@ docker run -d -p 6831:6831/udp -p 16686:16686 jaegertracing/all-in-one:latest
 * add Dockerfile,
 * write helm chart for K8S deployment,
 * configure TLS if it's not terminated on LB or Ingress,
-* add more options for configuration.
+* add more options for configuration,
+* list payments pagination,
