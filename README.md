@@ -37,3 +37,4 @@ docker run -d -p 6831:6831/udp -p 16686:16686 jaegertracing/all-in-one:latest
 * configure TLS if it's not terminated on LB or Ingress,
 * add more options for configuration,
 * list payments pagination,
+* port randomization for tests (requires configuration),

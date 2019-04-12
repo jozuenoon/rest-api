@@ -1,16 +1,18 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "FinTech api",
+    "title": "FinTech Payment API",
     "version": "1.0",
     "contact": {
-      "name": "FinTech api back",
+      "name": "FinTech API Tech Support",
       "url": "https://github.com/jozuenoone/rest-api",
-      "email": "none@example.com"
+      "email": "witold@example.com"
     }
   },
+  "host": "localhost:8080",
   "schemes": [
-    "https"
+    "https",
+    "http"
   ],
   "consumes": [
     "application/json"
@@ -39,6 +41,12 @@
           },
           "404": {
             "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/paymentapiError"
+            }
+          },
+          "415": {
+            "description": "Returned when unsupported media type is sent.",
             "schema": {
               "$ref": "#/definitions/paymentapiError"
             }
@@ -81,6 +89,12 @@
           },
           "404": {
             "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/paymentapiError"
+            }
+          },
+          "415": {
+            "description": "Returned when unsupported media type is sent.",
             "schema": {
               "$ref": "#/definitions/paymentapiError"
             }
@@ -131,6 +145,12 @@
               "$ref": "#/definitions/paymentapiError"
             }
           },
+          "415": {
+            "description": "Returned when unsupported media type is sent.",
+            "schema": {
+              "$ref": "#/definitions/paymentapiError"
+            }
+          },
           "500": {
             "description": "Returned when the internal server error occur.",
             "schema": {
@@ -173,6 +193,12 @@
               "$ref": "#/definitions/paymentapiError"
             }
           },
+          "415": {
+            "description": "Returned when unsupported media type is sent.",
+            "schema": {
+              "$ref": "#/definitions/paymentapiError"
+            }
+          },
           "500": {
             "description": "Returned when the internal server error occur.",
             "schema": {
@@ -211,6 +237,12 @@
           },
           "404": {
             "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/paymentapiError"
+            }
+          },
+          "415": {
+            "description": "Returned when unsupported media type is sent.",
             "schema": {
               "$ref": "#/definitions/paymentapiError"
             }
@@ -388,10 +420,7 @@
       "externalDocs": {
         "description": "Find out more about PaymentAPI",
         "url": "https://github.com/jozuenoon/rest-api/paymentapi"
-      },
-      "required": [
-        "organisation_id"
-      ]
+      }
     },
     "paymentapiPaymentAttributes": {
       "type": "object",

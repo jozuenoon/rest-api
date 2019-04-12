@@ -35,9 +35,13 @@ func httpPaymentGateway(ctx context.Context, g *run.Group) error {
 		}
 		opentracing.SetGlobalTracer(tracer)
 		defer closer.Close()
-		return http.Serve(ln, handlers.ContentTypeHandler(handlers.CORS(handlers.AllowCredentials(),
+		h := tracingWrapper(mux)
+		h = handlers.LoggingHandler(os.Stdout, h)
+		h = handlers.CORS(handlers.AllowCredentials(),
 			handlers.AllowedOrigins([]string{"*"}),
-			handlers.AllowedHeaders([]string{"X-API-Key"}))(handlers.LoggingHandler(os.Stdout, tracingWrapper(mux))), "application/json", "application/vnd.api+json"))
+			handlers.AllowedHeaders([]string{"X-API-Key", "X-Client-Session-Id", "x-requested-with", "Content-Type", "Authorization"}))(h)
+		h = handlers.ContentTypeHandler(h, "application/json", "application/vnd.api+json")
+		return http.Serve(ln, h)
 	}, func(error) {
 		ln.Close()
 	})

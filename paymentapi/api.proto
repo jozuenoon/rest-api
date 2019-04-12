@@ -9,15 +9,16 @@ import "protoc-gen-swagger/options/annotations.proto";
 
 option (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger) = {
 	info: {
-		title: "FinTech api";
+		title: "FinTech Payment API";
 		version: "1.0";
 		contact: {
-			name: "FinTech api back";
+			name: "FinTech API Tech Support";
 			url: "https://github.com/jozuenoone/rest-api";
-			email: "none@example.com";
+			email: "witold@example.com";
 		};
-	};
-	schemes: HTTPS;
+    };
+    host: "localhost:8080";
+	schemes: [HTTPS, HTTP];
 	consumes: "application/json";
 	produces: "application/json";
 	security_definitions: {
@@ -51,6 +52,17 @@ option (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger) = {
 		key: "404";
 		value: {
             description: "Returned when the resource does not exist.";
+            schema: {
+				json_schema: {
+					ref: ".paymentapi.Error";
+				}
+			}
+		}
+    }
+    responses: {
+		key: "415";
+		value: {
+            description: "Returned when unsupported media type is sent.";
             schema: {
 				json_schema: {
 					ref: ".paymentapi.Error";
@@ -108,7 +120,6 @@ message Payment {
 		json_schema: {
 			title: "Payment"
 			description: "Payment model"
-			required: ["organisation_id"]
 		}
 		external_docs: {
 			url: "https://github.com/jozuenoon/rest-api/paymentapi";

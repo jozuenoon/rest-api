@@ -1,10 +1,10 @@
-# FinTech api
+# FinTech Payment API
 ## Version: 1.0
 
 **Contact information:**  
-FinTech api back  
+FinTech API Tech Support  
 https://github.com/jozuenoone/rest-api  
-none@example.com  
+witold@example.com  
 
 ### Security
 **ApiKeyAuth**  
@@ -38,6 +38,7 @@ If empty payment ID is sent, full list of payments is returned.
 | 200 | A successful response. | [paymentapiPaymentServiceResponse](#paymentapipaymentserviceresponse) |
 | 403 | Returned when the user does not have permission to access the resource. | [paymentapiError](#paymentapierror) |
 | 404 | Returned when the resource does not exist. | [paymentapiError](#paymentapierror) |
+| 415 | Returned when unsupported media type is sent. | [paymentapiError](#paymentapierror) |
 | 500 | Returned when the internal server error occur. | [paymentapiError](#paymentapierror) |
 
 #### POST
@@ -62,6 +63,7 @@ Creates new payment and returns full payment data with special fields attached e
 | 200 | A successful response. | [paymentapiPaymentServiceResponse](#paymentapipaymentserviceresponse) |
 | 403 | Returned when the user does not have permission to access the resource. | [paymentapiError](#paymentapierror) |
 | 404 | Returned when the resource does not exist. | [paymentapiError](#paymentapierror) |
+| 415 | Returned when unsupported media type is sent. | [paymentapiError](#paymentapierror) |
 | 500 | Returned when the internal server error occur. | [paymentapiError](#paymentapierror) |
 
 ### /v1/transaction/payments/{id}
@@ -88,6 +90,7 @@ If empty payment ID is sent, full list of payments is returned.
 | 200 | A successful response. | [paymentapiPaymentServiceResponse](#paymentapipaymentserviceresponse) |
 | 403 | Returned when the user does not have permission to access the resource. | [paymentapiError](#paymentapierror) |
 | 404 | Returned when the resource does not exist. | [paymentapiError](#paymentapierror) |
+| 415 | Returned when unsupported media type is sent. | [paymentapiError](#paymentapierror) |
 | 500 | Returned when the internal server error occur. | [paymentapiError](#paymentapierror) |
 
 #### DELETE
@@ -112,6 +115,7 @@ Deletes payment by given ID.
 | 200 | A successful response. | [paymentapiPaymentRequest](#paymentapipaymentrequest) |
 | 403 | Returned when the user does not have permission to access the resource. | [paymentapiError](#paymentapierror) |
 | 404 | Returned when the resource does not exist. | [paymentapiError](#paymentapierror) |
+| 415 | Returned when unsupported media type is sent. | [paymentapiError](#paymentapierror) |
 | 500 | Returned when the internal server error occur. | [paymentapiError](#paymentapierror) |
 
 #### PATCH
@@ -137,6 +141,7 @@ Updates payment based on sent specification.
 | 200 | A successful response. | [paymentapiPaymentServiceResponse](#paymentapipaymentserviceresponse) |
 | 403 | Returned when the user does not have permission to access the resource. | [paymentapiError](#paymentapierror) |
 | 404 | Returned when the resource does not exist. | [paymentapiError](#paymentapierror) |
+| 415 | Returned when unsupported media type is sent. | [paymentapiError](#paymentapierror) |
 | 500 | Returned when the internal server error occur. | [paymentapiError](#paymentapierror) |
 
 ### Models
@@ -209,7 +214,7 @@ Payment model
 | type | string |  | No |
 | id | string |  | No |
 | version | string |  | No |
-| organisation_id | string |  | Yes |
+| organisation_id | string |  | No |
 | attributes | [paymentapiPaymentAttributes](#paymentapipaymentattributes) |  | No |
 
 #### paymentapiPaymentAttributes
