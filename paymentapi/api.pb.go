@@ -1039,9 +1039,21 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type PaymentServiceClient interface {
+	// Get or List payments
+	//
+	// If empty payment ID is sent, full list of payments is returned.
 	GetPayment(ctx context.Context, in *PaymentRequest, opts ...grpc.CallOption) (*PaymentServiceResponse, error)
+	// Create payment
+	//
+	// Creates new payment and returns full payment data with special fields attached eg. ID, organization etc.
 	CreatePayment(ctx context.Context, in *PaymentAttributes, opts ...grpc.CallOption) (*PaymentServiceResponse, error)
+	// Updates payment
+	//
+	// Updates payment based on sent specification.
 	UpdatePayment(ctx context.Context, in *PaymentUpdate, opts ...grpc.CallOption) (*PaymentServiceResponse, error)
+	// Delete payment
+	//
+	// Deletes payment by given ID.
 	DeletePayment(ctx context.Context, in *PaymentRequest, opts ...grpc.CallOption) (*PaymentRequest, error)
 }
 
@@ -1091,9 +1103,21 @@ func (c *paymentServiceClient) DeletePayment(ctx context.Context, in *PaymentReq
 
 // PaymentServiceServer is the server API for PaymentService service.
 type PaymentServiceServer interface {
+	// Get or List payments
+	//
+	// If empty payment ID is sent, full list of payments is returned.
 	GetPayment(context.Context, *PaymentRequest) (*PaymentServiceResponse, error)
+	// Create payment
+	//
+	// Creates new payment and returns full payment data with special fields attached eg. ID, organization etc.
 	CreatePayment(context.Context, *PaymentAttributes) (*PaymentServiceResponse, error)
+	// Updates payment
+	//
+	// Updates payment based on sent specification.
 	UpdatePayment(context.Context, *PaymentUpdate) (*PaymentServiceResponse, error)
+	// Delete payment
+	//
+	// Deletes payment by given ID.
 	DeletePayment(context.Context, *PaymentRequest) (*PaymentRequest, error)
 }
 

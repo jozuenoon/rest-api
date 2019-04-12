@@ -80,9 +80,21 @@ message PaymentServiceResponse {
 }
 
 service PaymentService {
+    // Get or List payments
+    //
+    // If empty payment ID is sent, full list of payments is returned.
     rpc GetPayment(PaymentRequest) returns (PaymentServiceResponse) {}
+    // Create payment
+    //
+    // Creates new payment and returns full payment data with special fields attached eg. ID, organization etc.
     rpc CreatePayment(PaymentAttributes) returns (PaymentServiceResponse) {}
+    // Updates payment
+    //
+    // Updates payment based on sent specification.
     rpc UpdatePayment(PaymentUpdate) returns (PaymentServiceResponse) {}
+    // Delete payment
+    //
+    // Deletes payment by given ID.
     rpc DeletePayment(PaymentRequest) returns (PaymentRequest) {}
 }
 

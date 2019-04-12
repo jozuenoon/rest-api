@@ -21,6 +21,8 @@
   "paths": {
     "/v1/transaction/payments": {
       "get": {
+        "summary": "Get or List payments",
+        "description": "If empty payment ID is sent, full list of payments is returned.",
         "operationId": "GetPayment2",
         "responses": {
           "200": {
@@ -61,6 +63,8 @@
         ]
       },
       "post": {
+        "summary": "Create payment",
+        "description": "Creates new payment and returns full payment data with special fields attached eg. ID, organization etc.",
         "operationId": "CreatePayment",
         "responses": {
           "200": {
@@ -105,6 +109,8 @@
     },
     "/v1/transaction/payments/{id}": {
       "get": {
+        "summary": "Get or List payments",
+        "description": "If empty payment ID is sent, full list of payments is returned.",
         "operationId": "GetPayment",
         "responses": {
           "200": {
@@ -145,6 +151,8 @@
         ]
       },
       "delete": {
+        "summary": "Delete payment",
+        "description": "Deletes payment by given ID.",
         "operationId": "DeletePayment",
         "responses": {
           "200": {
@@ -185,6 +193,8 @@
         ]
       },
       "patch": {
+        "summary": "Updates payment",
+        "description": "Updates payment based on sent specification.",
         "operationId": "UpdatePayment",
         "responses": {
           "200": {

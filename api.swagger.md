@@ -17,6 +17,14 @@ none@example.com
 ### /v1/transaction/payments
 
 #### GET
+##### Summary:
+
+Get or List payments
+
+##### Description:
+
+If empty payment ID is sent, full list of payments is returned.
+
 ##### Parameters
 
 | Name | Located in | Description | Required | Schema |
@@ -33,6 +41,14 @@ none@example.com
 | 500 | Returned when the internal server error occur. | [paymentapiError](#paymentapierror) |
 
 #### POST
+##### Summary:
+
+Create payment
+
+##### Description:
+
+Creates new payment and returns full payment data with special fields attached eg. ID, organization etc.
+
 ##### Parameters
 
 | Name | Located in | Description | Required | Schema |
@@ -51,6 +67,14 @@ none@example.com
 ### /v1/transaction/payments/{id}
 
 #### GET
+##### Summary:
+
+Get or List payments
+
+##### Description:
+
+If empty payment ID is sent, full list of payments is returned.
+
 ##### Parameters
 
 | Name | Located in | Description | Required | Schema |
@@ -67,6 +91,14 @@ none@example.com
 | 500 | Returned when the internal server error occur. | [paymentapiError](#paymentapierror) |
 
 #### DELETE
+##### Summary:
+
+Delete payment
+
+##### Description:
+
+Deletes payment by given ID.
+
 ##### Parameters
 
 | Name | Located in | Description | Required | Schema |
@@ -83,6 +115,14 @@ none@example.com
 | 500 | Returned when the internal server error occur. | [paymentapiError](#paymentapierror) |
 
 #### PATCH
+##### Summary:
+
+Updates payment
+
+##### Description:
+
+Updates payment based on sent specification.
+
 ##### Parameters
 
 | Name | Located in | Description | Required | Schema |
