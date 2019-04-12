@@ -81,10 +81,10 @@ var _ = Describe("Paymentservice", func() {
 		Expect(err).NotTo(HaveOccurred())
 		Expect(cresp).Should(Equal(resp))
 		Expect(cresp.Data[0].Attributes.ProcessingDate).Should(Equal(date))
-		Expect(cresp.Data[0].Attributes.Amount).Should(Equal(int64(0)))
+		Expect(cresp.Data[0].Attributes.Amount).Should(Equal(""))
 
 		date2 := "2018-01-02"
-		amount := int64(332234)
+		amount := "332234.44"
 		uresp, err := svc.UpdatePayment(context.Background(), &paymentapi.PaymentUpdate{
 			Id: cresp.Data[0].Id,
 			PaymentAttributes: &paymentapi.PaymentAttributes{
@@ -108,7 +108,7 @@ var _ = Describe("Paymentservice", func() {
 
 	It("should delete payment", func() {
 		date := "2017-01-02"
-		amount := int64(3345)
+		amount := "3345.44"
 		cresp, err := svc.CreatePayment(context.Background(), &paymentapi.PaymentAttributes{
 			ProcessingDate: date,
 			Amount:         amount,
@@ -145,7 +145,7 @@ var _ = Describe("Paymentservice", func() {
 		Expect(cresp.Data[0].Id).ShouldNot(BeEmpty())
 		Expect(cresp.Data[0].Attributes.ProcessingDate).Should(Equal(date))
 
-		amount := int64(43434)
+		amount := "43434"
 		resp, err := svc.CreatePayment(context.Background(), &paymentapi.PaymentAttributes{
 			Amount: amount,
 		})

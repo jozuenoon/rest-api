@@ -6,9 +6,8 @@ FinTech api back
 https://github.com/jozuenoone/rest-api  
 none@example.com  
 
-### Security (TODO)
-**ApiKeyAuth**
-Does not take effect. For future use.
+### Security
+**ApiKeyAuth**  
 
 |apiKey|*API Key*|
 |---|---|
@@ -18,8 +17,6 @@ Does not take effect. For future use.
 ### /v1/transaction/payments
 
 #### GET
-List payments if sent without any query parameters.
-
 ##### Parameters
 
 | Name | Located in | Description | Required | Schema |
@@ -33,12 +30,9 @@ List payments if sent without any query parameters.
 | 200 | A successful response. | [paymentapiPaymentServiceResponse](#paymentapipaymentserviceresponse) |
 | 403 | Returned when the user does not have permission to access the resource. | [paymentapiError](#paymentapierror) |
 | 404 | Returned when the resource does not exist. | [paymentapiError](#paymentapierror) |
-| 500 | Returned when internal server error occurs. | [paymentapiError](#paymentapierror) |
-
+| 500 | Returned when the internal server error occur. | [paymentapiError](#paymentapierror) |
 
 #### POST
-Create new payment.
-
 ##### Parameters
 
 | Name | Located in | Description | Required | Schema |
@@ -52,14 +46,11 @@ Create new payment.
 | 200 | A successful response. | [paymentapiPaymentServiceResponse](#paymentapipaymentserviceresponse) |
 | 403 | Returned when the user does not have permission to access the resource. | [paymentapiError](#paymentapierror) |
 | 404 | Returned when the resource does not exist. | [paymentapiError](#paymentapierror) |
-| 500 | Returned when internal server error occurs. | [paymentapiError](#paymentapierror) |
-
+| 500 | Returned when the internal server error occur. | [paymentapiError](#paymentapierror) |
 
 ### /v1/transaction/payments/{id}
 
 #### GET
-Get payment by ID.
-
 ##### Parameters
 
 | Name | Located in | Description | Required | Schema |
@@ -73,12 +64,9 @@ Get payment by ID.
 | 200 | A successful response. | [paymentapiPaymentServiceResponse](#paymentapipaymentserviceresponse) |
 | 403 | Returned when the user does not have permission to access the resource. | [paymentapiError](#paymentapierror) |
 | 404 | Returned when the resource does not exist. | [paymentapiError](#paymentapierror) |
-| 500 | Returned when internal server error occurs. | [paymentapiError](#paymentapierror) |
-
+| 500 | Returned when the internal server error occur. | [paymentapiError](#paymentapierror) |
 
 #### DELETE
-Delete payment by ID.
-
 ##### Parameters
 
 | Name | Located in | Description | Required | Schema |
@@ -89,15 +77,12 @@ Delete payment by ID.
 
 | Code | Description | Schema |
 | ---- | ----------- | ------ |
-| 200 | A successful response. |  |
+| 200 | A successful response. | [paymentapiPaymentRequest](#paymentapipaymentrequest) |
 | 403 | Returned when the user does not have permission to access the resource. | [paymentapiError](#paymentapierror) |
 | 404 | Returned when the resource does not exist. | [paymentapiError](#paymentapierror) |
-| 500 | Returned when internal server error occurs. | [paymentapiError](#paymentapierror) |
-
+| 500 | Returned when the internal server error occur. | [paymentapiError](#paymentapierror) |
 
 #### PATCH
-Update payment by ID.
-
 ##### Parameters
 
 | Name | Located in | Description | Required | Schema |
@@ -112,7 +97,7 @@ Update payment by ID.
 | 200 | A successful response. | [paymentapiPaymentServiceResponse](#paymentapipaymentserviceresponse) |
 | 403 | Returned when the user does not have permission to access the resource. | [paymentapiError](#paymentapierror) |
 | 404 | Returned when the resource does not exist. | [paymentapiError](#paymentapierror) |
-| 500 | Returned when internal server error occurs. | [paymentapiError](#paymentapierror) |
+| 500 | Returned when the internal server error occur. | [paymentapiError](#paymentapierror) |
 
 ### Models
 
@@ -122,7 +107,7 @@ Update payment by ID.
 | Name | Type | Description | Required |
 | ---- | ---- | ----------- | -------- |
 | amount | string |  | No |
-| currentcy | string |  | No |
+| currency | string |  | No |
 
 #### paymentapiBeneficiaryParty
 
@@ -191,7 +176,7 @@ Payment model
 
 | Name | Type | Description | Required |
 | ---- | ---- | ----------- | -------- |
-| amount | integer |  | No |
+| amount | string |  | No |
 | currency | string |  | No |
 | numeric_reference | string |  | No |
 | payment_id | string |  | No |
@@ -208,6 +193,12 @@ Payment model
 | fx | [paymentapiFx](#paymentapifx) |  | No |
 | debtor_party | [paymentapiDebtorParty](#paymentapidebtorparty) |  | No |
 | sponsor_party | [paymentapiSponsorParty](#paymentapisponsorparty) |  | No |
+
+#### paymentapiPaymentRequest
+
+| Name | Type | Description | Required |
+| ---- | ---- | ----------- | -------- |
+| id | string |  | No |
 
 #### paymentapiPaymentServiceResponse
 

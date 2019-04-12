@@ -57,6 +57,17 @@ option (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger) = {
 				}
 			}
 		}
+    }
+    responses: {
+		key: "500";
+		value: {
+            description: "Returned when the internal server error occur.";
+            schema: {
+				json_schema: {
+					ref: ".paymentapi.Error";
+				}
+			}
+		}
 	}
 };
 
@@ -100,7 +111,7 @@ message Payment {
 }
 
 message PaymentAttributes {
-    int64 amount = 1;
+    string amount = 1;
     string currency = 2;
     string numeric_reference = 3;
     string payment_id = 4;
@@ -133,7 +144,7 @@ message BeneficiaryParty {
 message ChargersInformation {
     message SenderCharges {
         string amount = 1;
-        string currentcy = 2;
+        string currency = 2;
     }
     string bearer_code = 1;
     repeated SenderCharges sender_charges = 2;

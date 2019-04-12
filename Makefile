@@ -17,3 +17,9 @@ swagger-gen:
 		-i /local/paymentapi/api.swagger.json \
 		-l go \
 		-o /local/client
+
+api.swagger.md: paymentapi/api.swagger.json
+	swagger-markdown -i $< -o $@
+
+api.swagger.pdf: api.swagger.md
+	pandoc $<  -o $@

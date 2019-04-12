@@ -42,6 +42,10 @@ paths:
           description: "Returned when the resource does not exist."
           schema:
             $ref: "#/definitions/paymentapiError"
+        500:
+          description: "Returned when the internal server error occur."
+          schema:
+            $ref: "#/definitions/paymentapiError"
     post:
       tags:
       - "PaymentService"
@@ -65,6 +69,10 @@ paths:
             $ref: "#/definitions/paymentapiError"
         404:
           description: "Returned when the resource does not exist."
+          schema:
+            $ref: "#/definitions/paymentapiError"
+        500:
+          description: "Returned when the internal server error occur."
           schema:
             $ref: "#/definitions/paymentapiError"
   /v1/transaction/payments/{id}:
@@ -92,6 +100,10 @@ paths:
           description: "Returned when the resource does not exist."
           schema:
             $ref: "#/definitions/paymentapiError"
+        500:
+          description: "Returned when the internal server error occur."
+          schema:
+            $ref: "#/definitions/paymentapiError"
     delete:
       tags:
       - "PaymentService"
@@ -114,6 +126,10 @@ paths:
             $ref: "#/definitions/paymentapiError"
         404:
           description: "Returned when the resource does not exist."
+          schema:
+            $ref: "#/definitions/paymentapiError"
+        500:
+          description: "Returned when the internal server error occur."
           schema:
             $ref: "#/definitions/paymentapiError"
     patch:
@@ -146,6 +162,10 @@ paths:
           description: "Returned when the resource does not exist."
           schema:
             $ref: "#/definitions/paymentapiError"
+        500:
+          description: "Returned when the internal server error occur."
+          schema:
+            $ref: "#/definitions/paymentapiError"
 securityDefinitions:
   ApiKeyAuth:
     type: "apiKey"
@@ -157,11 +177,11 @@ definitions:
     properties:
       amount:
         type: "string"
-      currentcy:
+      currency:
         type: "string"
     example:
       amount: "amount"
-      currentcy: "currentcy"
+      currency: "currency"
   paymentapiBeneficiaryParty:
     type: "object"
     properties:
@@ -207,9 +227,9 @@ definitions:
     example:
       sender_charges:
       - amount: "amount"
-        currentcy: "currentcy"
+        currency: "currency"
       - amount: "amount"
-        currentcy: "currentcy"
+        currency: "currency"
       bearer_code: "bearer_code"
       receiver_charges_amount: "receiver_charges_amount"
       receiver_charges_currency: "receiver_charges_currency"
@@ -306,9 +326,9 @@ definitions:
         charges_information:
           sender_charges:
           - amount: "amount"
-            currentcy: "currentcy"
+            currency: "currency"
           - amount: "amount"
-            currentcy: "currentcy"
+            currency: "currency"
           bearer_code: "bearer_code"
           receiver_charges_amount: "receiver_charges_amount"
           receiver_charges_currency: "receiver_charges_currency"
@@ -342,7 +362,6 @@ definitions:
     properties:
       amount:
         type: "string"
-        format: "int64"
       currency:
         type: "string"
       numeric_reference:
@@ -395,9 +414,9 @@ definitions:
       charges_information:
         sender_charges:
         - amount: "amount"
-          currentcy: "currentcy"
+          currency: "currency"
         - amount: "amount"
-          currentcy: "currentcy"
+          currency: "currency"
         bearer_code: "bearer_code"
         receiver_charges_amount: "receiver_charges_amount"
         receiver_charges_currency: "receiver_charges_currency"
@@ -460,9 +479,9 @@ definitions:
           charges_information:
             sender_charges:
             - amount: "amount"
-              currentcy: "currentcy"
+              currency: "currency"
             - amount: "amount"
-              currentcy: "currentcy"
+              currency: "currency"
             bearer_code: "bearer_code"
             receiver_charges_amount: "receiver_charges_amount"
             receiver_charges_currency: "receiver_charges_currency"
@@ -512,9 +531,9 @@ definitions:
           charges_information:
             sender_charges:
             - amount: "amount"
-              currentcy: "currentcy"
+              currency: "currency"
             - amount: "amount"
-              currentcy: "currentcy"
+              currency: "currency"
             bearer_code: "bearer_code"
             receiver_charges_amount: "receiver_charges_amount"
             receiver_charges_currency: "receiver_charges_currency"

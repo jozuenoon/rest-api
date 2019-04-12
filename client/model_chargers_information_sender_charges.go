@@ -12,5 +12,5 @@ package swagger
 
 type ChargersInformationSenderCharges struct {
 	Amount string `json:"amount,omitempty"`
-	Currentcy string `json:"currentcy,omitempty"`
+	Currency string `json:"currency,omitempty"`
 }

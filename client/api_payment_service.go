@@ -160,6 +160,22 @@ func (a *PaymentServiceApiService) CreatePayment(ctx context.Context, body Payme
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		
+		if localVarHttpResponse.StatusCode == 500 {
+			localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+			if err != nil {
+				return localVarReturnValue, localVarHttpResponse, err
+			}
+
+			var v PaymentapiError
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
@@ -298,6 +314,22 @@ func (a *PaymentServiceApiService) DeletePayment(ctx context.Context, id string)
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		
+		if localVarHttpResponse.StatusCode == 500 {
+			localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+			if err != nil {
+				return localVarReturnValue, localVarHttpResponse, err
+			}
+
+			var v PaymentapiError
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
@@ -421,6 +453,22 @@ func (a *PaymentServiceApiService) GetPayment(ctx context.Context, id string) (P
 		}
 		
 		if localVarHttpResponse.StatusCode == 404 {
+			localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+			if err != nil {
+				return localVarReturnValue, localVarHttpResponse, err
+			}
+
+			var v PaymentapiError
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		
+		if localVarHttpResponse.StatusCode == 500 {
 			localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
 			if err != nil {
 				return localVarReturnValue, localVarHttpResponse, err
@@ -582,6 +630,22 @@ func (a *PaymentServiceApiService) GetPayment2(ctx context.Context, localVarOpti
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		
+		if localVarHttpResponse.StatusCode == 500 {
+			localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+			if err != nil {
+				return localVarReturnValue, localVarHttpResponse, err
+			}
+
+			var v PaymentapiError
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
@@ -708,6 +772,22 @@ func (a *PaymentServiceApiService) UpdatePayment(ctx context.Context, id string,
 		}
 		
 		if localVarHttpResponse.StatusCode == 404 {
+			localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+			if err != nil {
+				return localVarReturnValue, localVarHttpResponse, err
+			}
+
+			var v PaymentapiError
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		
+		if localVarHttpResponse.StatusCode == 500 {
 			localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
 			if err != nil {
 				return localVarReturnValue, localVarHttpResponse, err

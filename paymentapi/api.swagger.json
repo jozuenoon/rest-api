@@ -40,6 +40,12 @@
             "schema": {
               "$ref": "#/definitions/paymentapiError"
             }
+          },
+          "500": {
+            "description": "Returned when the internal server error occur.",
+            "schema": {
+              "$ref": "#/definitions/paymentapiError"
+            }
           }
         },
         "parameters": [
@@ -71,6 +77,12 @@
           },
           "404": {
             "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/paymentapiError"
+            }
+          },
+          "500": {
+            "description": "Returned when the internal server error occur.",
             "schema": {
               "$ref": "#/definitions/paymentapiError"
             }
@@ -112,6 +124,12 @@
             "schema": {
               "$ref": "#/definitions/paymentapiError"
             }
+          },
+          "500": {
+            "description": "Returned when the internal server error occur.",
+            "schema": {
+              "$ref": "#/definitions/paymentapiError"
+            }
           }
         },
         "parameters": [
@@ -143,6 +161,12 @@
           },
           "404": {
             "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/paymentapiError"
+            }
+          },
+          "500": {
+            "description": "Returned when the internal server error occur.",
             "schema": {
               "$ref": "#/definitions/paymentapiError"
             }
@@ -180,6 +204,12 @@
             "schema": {
               "$ref": "#/definitions/paymentapiError"
             }
+          },
+          "500": {
+            "description": "Returned when the internal server error occur.",
+            "schema": {
+              "$ref": "#/definitions/paymentapiError"
+            }
           }
         },
         "parameters": [
@@ -211,7 +241,7 @@
         "amount": {
           "type": "string"
         },
-        "currentcy": {
+        "currency": {
           "type": "string"
         }
       }
@@ -357,8 +387,7 @@
       "type": "object",
       "properties": {
         "amount": {
-          "type": "string",
-          "format": "int64"
+          "type": "string"
         },
         "currency": {
           "type": "string"

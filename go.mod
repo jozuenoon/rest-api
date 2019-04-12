@@ -11,6 +11,7 @@ require (
 	github.com/gorilla/handlers v1.4.0
 	github.com/grpc-ecosystem/grpc-gateway v1.8.5
 	github.com/jinzhu/copier v0.0.0-20180308034124-7e38e58719c3
+	github.com/nsf/jsondiff v0.0.0-20190302080047-dbf513526b7f
 	github.com/oklog/run v1.0.0
 	github.com/oklog/ulid v1.3.1
 	github.com/onsi/ginkgo v1.7.0
