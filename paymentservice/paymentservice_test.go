@@ -28,7 +28,8 @@ var _ = Describe("Paymentservice", func() {
 	})
 
 	AfterEach(func() {
-		os.RemoveAll(tmpDir)
+		err = os.RemoveAll(tmpDir)
+		Expect(err).NotTo(HaveOccurred())
 	})
 
 	It("should not error", func() {

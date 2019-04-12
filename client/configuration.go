@@ -10,7 +10,9 @@
 
 package swagger
 
-import "net/http"
+import (
+	"net/http"
+)
 
 // contextKeys are used to identify the type of value in the context.
 // Since these are string, it is possible to get a short description of the
@@ -59,7 +61,7 @@ type Configuration struct {
 
 func NewConfiguration() *Configuration {
 	cfg := &Configuration{
-		BasePath:      "https://localhost:8080",
+		BasePath:      "https://localhost",
 		DefaultHeader: make(map[string]string),
 		UserAgent:     "Swagger-Codegen/1.0.0/go",
 	}
