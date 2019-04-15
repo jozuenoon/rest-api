@@ -8,7 +8,7 @@ Models and original design are defined with protobuf file and yaml http annotati
 
 Implementation of service is located under `paymentservice`.
 
-Server runtime is can be found under `cmd` directory.
+Server runtime can be found under `cmd` directory.
 
 # Testing
 
@@ -16,7 +16,7 @@ Tests are BDD based tests with `ginkgo`, please run `make test`.
 
 # Client
 
-Client is generated form swagger definition.
+Client is generated form swagger definition under `client` directory.
 
 # Tracing
 
@@ -30,7 +30,6 @@ docker run -d -p 6831:6831/udp -p 16686:16686 jaegertracing/all-in-one:latest
 
 * add middleware for authorization and authentication,
 * add input validation eg. with https://github.com/mwitkow/go-proto-validators,
-* add proper authentication and authorization,
 * make swagger documentation better, this requires writing annotations in proto file unfortunately, since only `http` annotation is supported with yaml files,
 * add Dockerfile,
 * write helm chart for K8S deployment,
