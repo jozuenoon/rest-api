@@ -46,7 +46,7 @@ func (ps *PaymentService) GetPayment(ctx context.Context, req *paymentapi.Paymen
 	if req.Id != "" {
 		key, err := ParseUlid(req.Id)
 		if err != nil {
-			return nil, status.Error(codes.Internal, err.Error())
+			return nil, err
 		}
 		data, err := ps.db.Get(key, nil)
 		if err != nil {
@@ -121,7 +121,7 @@ func (ps *PaymentService) UpdatePayment(ctx context.Context, pt *paymentapi.Paym
 	defer span.Finish()
 	key, err := ParseUlid(pt.Id)
 	if err != nil {
-		return nil, status.Error(codes.InvalidArgument, err.Error())
+		return nil, err
 	}
 	data, err := ps.db.Get(key, nil)
 	if err != nil {
@@ -153,7 +153,7 @@ func (ps *PaymentService) DeletePayment(ctx context.Context, pt *paymentapi.Paym
 	defer span.Finish()
 	key, err := ParseUlid(pt.Id)
 	if err != nil {
-		return nil, status.Error(codes.InvalidArgument, err.Error())
+		return nil, err
 	}
 	err = ps.db.Delete(key, nil)
 	if err != nil {
@@ -190,14 +190,14 @@ func unmarshalPayments(data [][]byte) (*paymentapi.PaymentServiceResponse, error
 }
 
 func organizationIdFromContext(ctx context.Context) (string, error) {
-	// TODO: Give API Key should inject user details in http middleware.
+	// TODO: API Key should be injected at authorization middleware.
 	return "example_organization", nil
 }
 
 func ParseUlid(s string) ([]byte, error) {
 	u, err := ulid.Parse(s)
 	if err != nil {
-		return nil, err
+		return nil, status.Error(codes.InvalidArgument, "provided ID is invalid")
 	}
 	return u.MarshalBinary()
 }
