@@ -42,7 +42,7 @@ var _ = Describe("Paymentservice", func() {
 		Expect(resp.Data).Should(HaveLen(0))
 	})
 
-	It("should create content", func() {
+	It("should create resource", func() {
 		date := "2017-01-01"
 		resp, err := svc.CreatePayment(context.Background(), &paymentapi.PaymentAttributes{
 			ProcessingDate: date,
@@ -53,7 +53,7 @@ var _ = Describe("Paymentservice", func() {
 		Expect(resp.Data[0].Attributes.ProcessingDate).Should(Equal(date))
 	})
 
-	It("should return created content", func() {
+	It("should return created resource", func() {
 		date := "2017-01-01"
 		cresp, err := svc.CreatePayment(context.Background(), &paymentapi.PaymentAttributes{
 			ProcessingDate: date,
@@ -106,7 +106,7 @@ var _ = Describe("Paymentservice", func() {
 		Expect(uresp.Data[0].Attributes.Amount).Should(Equal(amount))
 	})
 
-	It("should delete payment", func() {
+	It("should delete resource", func() {
 		date := "2017-01-02"
 		amount := "3345.44"
 		cresp, err := svc.CreatePayment(context.Background(), &paymentapi.PaymentAttributes{
@@ -135,7 +135,7 @@ var _ = Describe("Paymentservice", func() {
 		Expect(err).Should(HaveOccurred())
 	})
 
-	It("should create multiple contents", func() {
+	It("should create multiple resources", func() {
 		date := "2017-01-01"
 		cresp, err := svc.CreatePayment(context.Background(), &paymentapi.PaymentAttributes{
 			ProcessingDate: date,
