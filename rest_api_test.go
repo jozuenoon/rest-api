@@ -53,7 +53,7 @@ var _ = Describe("RestApi", func() {
 		Expect(resp.Data).Should(HaveLen(0))
 	})
 
-	It("should create content", func() {
+	It("should create resource", func() {
 		date := "2017-01-01"
 		resp, _, err := api.CreatePayment(context.Background(), PaymentapiPaymentAttributes{
 			ProcessingDate: date,
@@ -64,7 +64,7 @@ var _ = Describe("RestApi", func() {
 		Expect(resp.Data[0].Attributes.ProcessingDate).Should(Equal(date))
 	})
 
-	It("should return created content", func() {
+	It("should return created resource", func() {
 		date := "2017-01-01"
 		cresp, _, err := api.CreatePayment(context.Background(), PaymentapiPaymentAttributes{
 			ProcessingDate: date,
@@ -76,7 +76,7 @@ var _ = Describe("RestApi", func() {
 		Expect(cresp).Should(Equal(resp))
 	})
 
-	It("should change values with update", func() {
+	It("should change values on update", func() {
 		date := "2017-01-02"
 		cresp, _, err := api.CreatePayment(context.Background(), PaymentapiPaymentAttributes{
 			ProcessingDate: date,
@@ -108,7 +108,7 @@ var _ = Describe("RestApi", func() {
 		Expect(uresp.Data[0].Attributes.Amount).Should(Equal(amount))
 	})
 
-	It("should delete payment", func() {
+	It("should delete resource", func() {
 		date := "2017-01-02"
 		amount := "3345.4"
 		cresp, _, err := api.CreatePayment(context.Background(), PaymentapiPaymentAttributes{
@@ -131,7 +131,7 @@ var _ = Describe("RestApi", func() {
 		Expect(err).Should(HaveOccurred())
 	})
 
-	It("should create multiple contents", func() {
+	It("should create multiple resources", func() {
 		resp, _, err := api.GetPayment2(context.Background(), nil)
 		Expect(err).NotTo(HaveOccurred())
 		existingEnteries := len(resp.Data)
@@ -159,7 +159,7 @@ var _ = Describe("RestApi", func() {
 		Expect(resp.Data).Should(HaveLen(existingEnteries + 2))
 	})
 
-	It("should create and retrieve complete message from json", func() {
+	It("should create and retrieve complete resource from json", func() {
 		body := PaymentapiPaymentAttributes{}
 		json.Unmarshal(exampleData, &body)
 
