@@ -53,8 +53,8 @@ var _ = Describe("RestApi", func() {
 		Expect(resp.Data).Should(HaveLen(0))
 	})
 
-	It("should create resource", func() {
-		date := "2017-01-01"
+	It("should create object", func() {
+		date := "2017-01-02"
 		resp, _, err := api.CreatePayment(context.Background(), PaymentapiPaymentAttributes{
 			ProcessingDate: date,
 		})
@@ -64,8 +64,8 @@ var _ = Describe("RestApi", func() {
 		Expect(resp.Data[0].Attributes.ProcessingDate).Should(Equal(date))
 	})
 
-	It("should return created resource", func() {
-		date := "2017-01-01"
+	It("should return created object", func() {
+		date := "2017-01-03"
 		cresp, _, err := api.CreatePayment(context.Background(), PaymentapiPaymentAttributes{
 			ProcessingDate: date,
 		})
@@ -76,7 +76,7 @@ var _ = Describe("RestApi", func() {
 		Expect(cresp).Should(Equal(resp))
 	})
 
-	It("should change values on update", func() {
+	It("should change values on object update", func() {
 		date := "2017-01-02"
 		cresp, _, err := api.CreatePayment(context.Background(), PaymentapiPaymentAttributes{
 			ProcessingDate: date,
@@ -108,7 +108,7 @@ var _ = Describe("RestApi", func() {
 		Expect(uresp.Data[0].Attributes.Amount).Should(Equal(amount))
 	})
 
-	It("should delete resource", func() {
+	It("should delete object", func() {
 		date := "2017-01-02"
 		amount := "3345.4"
 		cresp, _, err := api.CreatePayment(context.Background(), PaymentapiPaymentAttributes{
@@ -127,11 +127,11 @@ var _ = Describe("RestApi", func() {
 		_, _, err = api.DeletePayment(context.Background(), cresp.Data[0].Id)
 		Expect(err).NotTo(HaveOccurred())
 
-		resp, _, err = api.GetPayment(context.Background(), cresp.Data[0].Id)
+		_, _, err = api.GetPayment(context.Background(), cresp.Data[0].Id)
 		Expect(err).Should(HaveOccurred())
 	})
 
-	It("should create multiple resources", func() {
+	It("should create multiple resource objects", func() {
 		resp, _, err := api.GetPayment2(context.Background(), nil)
 		Expect(err).NotTo(HaveOccurred())
 		existingEnteries := len(resp.Data)
@@ -159,9 +159,10 @@ var _ = Describe("RestApi", func() {
 		Expect(resp.Data).Should(HaveLen(existingEnteries + 2))
 	})
 
-	It("should create and retrieve complete resource from json", func() {
+	It("should create and retrieve complete resource data from json", func() {
 		body := PaymentapiPaymentAttributes{}
-		json.Unmarshal(exampleData, &body)
+		err := json.Unmarshal(exampleData, &body)
+		Expect(err).NotTo(HaveOccurred())
 
 		resp, _, err := api.CreatePayment(context.Background(), body)
 		Expect(err).NotTo(HaveOccurred())
@@ -173,9 +174,23 @@ var _ = Describe("RestApi", func() {
 		payload1, err := json.Marshal(gresp.Data[0].Attributes)
 		Expect(err).NotTo(HaveOccurred())
 
-		eq, err := AreEqualJSON(payload1, exampleData)
+		itsEqual, err := AreEqualJSON(payload1, exampleData)
 		Expect(err).NotTo(HaveOccurred())
-		Expect(eq).Should(BeTrue())
+		Expect(itsEqual).Should(BeTrue())
+	})
+
+	It("should reject non ULID id", func() {
+		gresp, hresp, err := api.GetPayment(context.Background(), "some_invalid_id")
+		Expect(err).To(HaveOccurred())
+		Expect(hresp.StatusCode).To(Equal(400))
+		Expect(gresp.Data).To(BeNil())
+	})
+
+	It("should error on non existing object", func() {
+		gresp, hresp, err := api.GetPayment(context.Background(), "01D9CK9NF4JQSFZB9P1K3S1QC7")
+		Expect(err).To(HaveOccurred())
+		Expect(hresp.StatusCode).To(Equal(404))
+		Expect(gresp.Data).To(BeNil())
 	})
 })
 
