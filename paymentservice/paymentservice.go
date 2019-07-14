@@ -60,7 +60,7 @@ func (ps *PaymentService) GetPayment(ctx context.Context, req *paymentapi.Paymen
 			Data: []*paymentapi.Payment{payment},
 		}, nil
 	}
-	payments := []*paymentapi.Payment{}
+	var payments []*paymentapi.Payment
 	iter := ps.db.NewIterator(nil, nil)
 	for iter.Next() {
 		payment, err := unmarshalPayment(iter.Value())
@@ -83,11 +83,11 @@ func (ps *PaymentService) CreatePayment(ctx context.Context, pt *paymentapi.Paym
 	span, ctx := opentracing.StartSpanFromContext(ctx, "CreatePayment")
 	defer span.Finish()
 	// Generate ULID for new resource.
-	ulid, err := ulid.New(ulid.Timestamp(time.Now()), ps.entropy)
+	uid, err := ulid.New(ulid.Timestamp(time.Now()), ps.entropy)
 	if err != nil {
 		return nil, status.Error(codes.InvalidArgument, err.Error())
 	}
-	key, err := ulid.MarshalBinary()
+	key, err := uid.MarshalBinary()
 	if err != nil {
 		return nil, status.Error(codes.Internal, err.Error())
 	}
@@ -97,7 +97,7 @@ func (ps *PaymentService) CreatePayment(ctx context.Context, pt *paymentapi.Paym
 		return nil, status.Error(codes.Internal, err.Error())
 	}
 	payment := &paymentapi.Payment{
-		Id:             ulid.String(),
+		Id:             uid.String(),
 		OrganisationId: organizationId,
 		Type:           "Payment",
 		Version:        version,
