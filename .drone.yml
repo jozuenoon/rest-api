@@ -18,6 +18,8 @@ platform:
 trigger:
   branch:
     - master
+  ref:
+    - refs/tags/v*
 
 steps:
   # Goreleaser needs at least the last two tags.
