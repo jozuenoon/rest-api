@@ -36,12 +36,12 @@ func (s *Server) Run(ctx context.Context) {
 	signalHandler(cctx, g)
 	err := httpPaymentGateway(cctx, g)
 	if err != nil {
-		glog.Errorln("msg", "failed to create http server", "err", err)
+		glog.Errorln("msg=", "failed to create http server ", "err=", err)
 	}
 
 	err = grpcServiceServer(cctx, g, s.DatabasePath)
 	if err != nil {
-		glog.Errorln("msg", "failed to create grpc server", "err", err)
+		glog.Errorln("msg", "failed to create grpc server ", "err=", err)
 	}
 	glog.Error("err", g.Run())
 }
@@ -55,7 +55,7 @@ func signalHandler(ctx context.Context, g *run.Group) {
 		for sig := range signals {
 			switch sig {
 			case syscall.SIGINT, syscall.SIGTERM:
-				glog.Info("msg", "got termination signal", "sig", sig)
+				glog.Info("msg=", "got termination signal ", "sig=", sig)
 				return fmt.Errorf("terminated: %v", sig)
 			}
 		}

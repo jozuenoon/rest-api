@@ -1,5 +1,12 @@
 # Secrets that must be set in drone.io:
+
 # GITHUB_TOKEN_DRONE (scope required: repo/public_repo)
+
+# CODECOV_TOKEN from codecov.io
+
+# Docker credentials:
+# DOCKER_USERNAME
+# DOCKER_PASSWORD
 
 kind: pipeline
 name: default
@@ -28,6 +35,15 @@ steps:
       - go build -v ./...
       - go test -coverpkg=./... -race -covermode=atomic -coverprofile=coverage.txt github.com/jozuenoon/rest-api
       - curl -s https://codecov.io/bash | bash
+
+  - name: docker
+    image: plugins/docker
+    settings:
+      dockerfile: cmd/Dockerfile
+      repo: jozuenoon/rest-api
+      auto_tag: true
+      username: { from_secret: DOCKER_USERNAME }
+      password: { from_secret: DOCKER_PASSWORD }
 
   - name: release
     image: goreleaser/goreleaser:latest
