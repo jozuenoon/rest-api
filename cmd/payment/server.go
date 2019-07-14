@@ -23,10 +23,8 @@ func (s *Server) Run(ctx context.Context) {
 	// Since we pass context deeper inside services
 	// we need to watch context Done and cancel in case of termination.
 	g.Add(func() error {
-		select {
-		case <-cctx.Done():
-			return fmt.Errorf("context canceled")
-		}
+		<-cctx.Done()
+		return fmt.Errorf("context canceled")
 	}, func(error) {
 		cancel()
 	})
@@ -48,7 +46,7 @@ func (s *Server) Run(ctx context.Context) {
 
 var shutdownSignals = []os.Signal{syscall.SIGINT, syscall.SIGTERM}
 
-func signalHandler(ctx context.Context, g *run.Group) {
+func signalHandler(_ context.Context, g *run.Group) {
 	signals := make(chan os.Signal, 2)
 	signal.Notify(signals, shutdownSignals...)
 	g.Add(func() error {

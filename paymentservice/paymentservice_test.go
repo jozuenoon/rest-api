@@ -129,7 +129,7 @@ var _ = Describe("Paymentservice", func() {
 		})
 		Expect(err).NotTo(HaveOccurred())
 
-		resp, err = svc.GetPayment(context.Background(), &paymentapi.PaymentRequest{
+		_, err = svc.GetPayment(context.Background(), &paymentapi.PaymentRequest{
 			Id: cresp.Data[0].Id,
 		})
 		Expect(err).Should(HaveOccurred())

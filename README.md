@@ -1,6 +1,7 @@
 # FinTech API
-
+[![Build Status](https://cloud.drone.io/api/badges/jozuenoon/rest-api/status.svg)](https://cloud.drone.io/jozuenoon/rest-api)
 [![codecov](https://codecov.io/gh/jozuenoon/rest-api/branch/master/graph/badge.svg)](https://codecov.io/gh/jozuenoon/rest-api)
+[![GolangCI](https://golangci.com/badges/github.com/jozuenoon/rest-api.svg)](https://golangci.com/r/github.com/jozuenoon/rest-api)
 
 This repository intention is to demonstrate building REST API using `protobuf` and `grpc-gateway`.
 

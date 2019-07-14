@@ -1,4 +1,4 @@
-package rest_api
+package restapi_test
 
 import (
 	"context"
@@ -264,14 +264,13 @@ func AreEqualJSON(payload1, payload2 []byte) (bool, error) {
 	var data1 interface{}
 	var data2 interface{}
 
-	var err error
-	err = json.Unmarshal(payload1, &data1)
+	err := json.Unmarshal(payload1, &data1)
 	if err != nil {
-		return false, fmt.Errorf("Error mashalling payload 1 :: %s", err.Error())
+		return false, fmt.Errorf("failed to mashal payload 1 :: %s", err.Error())
 	}
 	err = json.Unmarshal(payload2, &data2)
 	if err != nil {
-		return false, fmt.Errorf("Error mashalling payload 2 :: %s", err.Error())
+		return false, fmt.Errorf("failed to mashal payload 2 :: %s", err.Error())
 	}
 
 	if !reflect.DeepEqual(data1, data2) {

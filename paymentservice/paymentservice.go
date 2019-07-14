@@ -41,7 +41,7 @@ type PaymentService struct {
 }
 
 func (ps *PaymentService) GetPayment(ctx context.Context, req *paymentapi.PaymentRequest) (*paymentapi.PaymentServiceResponse, error) {
-	span, ctx := opentracing.StartSpanFromContext(ctx, "GetPayment")
+	span, _ := opentracing.StartSpanFromContext(ctx, "GetPayment")
 	defer span.Finish()
 	if req.Id != "" {
 		key, err := ParseUlid(req.Id)
@@ -91,14 +91,14 @@ func (ps *PaymentService) CreatePayment(ctx context.Context, pt *paymentapi.Paym
 	if err != nil {
 		return nil, status.Error(codes.Internal, err.Error())
 	}
-	organizationId, err := organizationIdFromContext(ctx)
+	organizationID, err := organizationIDFromContext(ctx)
 	if err != nil {
 		// should be always present from authorization middleware
 		return nil, status.Error(codes.Internal, err.Error())
 	}
 	payment := &paymentapi.Payment{
 		Id:             uid.String(),
-		OrganisationId: organizationId,
+		OrganisationId: organizationID,
 		Type:           "Payment",
 		Version:        version,
 		Attributes:     pt,
@@ -117,7 +117,7 @@ func (ps *PaymentService) CreatePayment(ctx context.Context, pt *paymentapi.Paym
 }
 
 func (ps *PaymentService) UpdatePayment(ctx context.Context, pt *paymentapi.PaymentUpdate) (*paymentapi.PaymentServiceResponse, error) {
-	span, ctx := opentracing.StartSpanFromContext(ctx, "UpdatePayment")
+	span, _ := opentracing.StartSpanFromContext(ctx, "UpdatePayment")
 	defer span.Finish()
 	key, err := ParseUlid(pt.Id)
 	if err != nil {
@@ -149,7 +149,7 @@ func (ps *PaymentService) UpdatePayment(ctx context.Context, pt *paymentapi.Paym
 }
 
 func (ps *PaymentService) DeletePayment(ctx context.Context, pt *paymentapi.PaymentRequest) (*paymentapi.PaymentRequest, error) {
-	span, ctx := opentracing.StartSpanFromContext(ctx, "DeletePayment")
+	span, _ := opentracing.StartSpanFromContext(ctx, "DeletePayment")
 	defer span.Finish()
 	key, err := ParseUlid(pt.Id)
 	if err != nil {
@@ -175,7 +175,7 @@ func unmarshalPayment(data []byte) (*paymentapi.Payment, error) {
 	return payment, nil
 }
 
-func organizationIdFromContext(ctx context.Context) (string, error) {
+func organizationIDFromContext(ctx context.Context) (string, error) {
 	// TODO: API Key should be injected at authorization middleware.
 	return "example_organization", nil
 }

@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+
 	"github.com/jozuenoon/rest-api/cmd/payment"
 	"golang.org/x/net/context"
 )

@@ -10,7 +10,7 @@ import (
 	"google.golang.org/grpc"
 )
 
-func grpcServiceServer(ctx context.Context, g *run.Group, databasePath string) error {
+func grpcServiceServer(_ context.Context, g *run.Group, databasePath string) error {
 	ln, err := net.Listen("tcp", "localhost:9090")
 	if err != nil {
 		return err

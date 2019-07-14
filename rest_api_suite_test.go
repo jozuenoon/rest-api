@@ -1,4 +1,4 @@
-package rest_api
+package restapi_test
 
 import (
 	"testing"
