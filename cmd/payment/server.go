@@ -43,7 +43,7 @@ func (s *Server) Run(ctx context.Context) {
 	if err != nil {
 		glog.Errorln("msg", "failed to create grpc server", "err", err)
 	}
-	glog.Error("err\t", g.Run())
+	glog.Error("err", g.Run())
 }
 
 var shutdownSignals = []os.Signal{syscall.SIGINT, syscall.SIGTERM}

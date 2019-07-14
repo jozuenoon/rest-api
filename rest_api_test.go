@@ -1,4 +1,4 @@
-package rest_api_test
+package rest_api
 
 import (
 	"context"
@@ -12,7 +12,7 @@ import (
 	. "github.com/onsi/gomega"
 
 	. "github.com/jozuenoon/rest-api/client"
-	"github.com/jozuenoon/rest-api/cmd/payment"
+	. "github.com/jozuenoon/rest-api/cmd/payment"
 	"github.com/nsf/jsondiff"
 )
 
@@ -22,7 +22,7 @@ var _ = Describe("RestApi", func() {
 		err    error
 		cancel func()
 		ctx    context.Context
-		srv    *payment.Server
+		srv    Server
 	)
 
 	client := NewAPIClient(&Configuration{
@@ -33,10 +33,13 @@ var _ = Describe("RestApi", func() {
 
 	tmpDir, err = ioutil.TempDir("", "payment_database")
 	ctx, cancel = context.WithCancel(context.Background())
-	srv = &payment.Server{
-		DatabasePath: tmpDir,
-	}
-	go srv.Run(ctx)
+
+	BeforeSuite(func() {
+		srv = Server{
+			DatabasePath: tmpDir,
+		}
+		go srv.Run(ctx)
+	})
 
 	AfterSuite(func() {
 		cancel()
