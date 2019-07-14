@@ -19,9 +19,11 @@ steps:
     image: golang
     environment:
       GO111MODULE: on
+      CODECOV_TOKEN: { from_secret: CODECOV_TOKEN }
     commands:
       - go build -v ./...
       - go test ./... -race -coverprofile=coverage.txt -covermode=atomic
+      - curl -s https://codecov.io/bash | bash
 
   - name: release
     image: goreleaser/goreleaser:latest
