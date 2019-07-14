@@ -8,8 +8,9 @@ platform:
   os: linux
   arch: amd64
 
-branches:
-  - master
+trigger:
+  branch:
+    - master
 
 steps:
   # Goreleaser needs at least the last two tags.
@@ -25,7 +26,7 @@ steps:
       CODECOV_TOKEN: { from_secret: CODECOV_TOKEN }
     commands:
       - go build -v ./...
-      - go test ./... -race -coverprofile=coverage.txt -covermode=atomic
+      - go test -coverpkg=./... -race -covermode=atomic -coverprofile=coverage.txt github.com/jozuenoon/rest-api
       - curl -s https://codecov.io/bash | bash
 
   - name: release
