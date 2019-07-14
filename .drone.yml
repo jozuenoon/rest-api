@@ -22,6 +22,7 @@ steps:
     commands:
       - go build -v ./...
       - go test ./... -race -coverprofile=coverage.txt -covermode=atomic
+
   - name: release
     image: goreleaser/goreleaser:latest
     commands:
