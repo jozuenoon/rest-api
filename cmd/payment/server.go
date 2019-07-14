@@ -1,7 +1,6 @@
 package payment
 
 import (
-	"flag"
 	"fmt"
 	"os"
 	"os/signal"
@@ -32,7 +31,6 @@ func (s *Server) Run(ctx context.Context) {
 		cancel()
 	})
 
-	flag.Parse()
 	defer glog.Flush()
 
 	signalHandler(cctx, g)

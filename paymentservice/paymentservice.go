@@ -175,20 +175,6 @@ func unmarshalPayment(data []byte) (*paymentapi.Payment, error) {
 	return payment, nil
 }
 
-func unmarshalPayments(data [][]byte) (*paymentapi.PaymentServiceResponse, error) {
-	payments := make([]*paymentapi.Payment, 0, len(data))
-	for _, pb := range data {
-		payment, err := unmarshalPayment(pb)
-		if err != nil {
-			return nil, err
-		}
-		payments = append(payments, payment)
-	}
-	return &paymentapi.PaymentServiceResponse{
-		Data: payments,
-	}, nil
-}
-
 func organizationIdFromContext(ctx context.Context) (string, error) {
 	// TODO: API Key should be injected at authorization middleware.
 	return "example_organization", nil
