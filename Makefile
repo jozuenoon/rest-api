@@ -11,8 +11,7 @@ bin:
 	$(BUILD_FLAGS) go build  -o bin/server cmd/main.go
 
 test:
-	ginkgo .
-	ginkgo paymentservice
+	go test -coverpkg=./... -race -covermode=atomic -coverprofile=coverage.txt github.com/jozuenoon/rest-api
 
 .PHONY: run
 run:
